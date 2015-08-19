@@ -2141,6 +2141,7 @@ class ProductCore extends ObjectModel
         $result = Db::getInstance()->executeS('
 			SELECT pai.`id_image`, pai.`id_product_attribute`, il.`legend`
 			FROM `'._DB_PREFIX_.'product_attribute_image` pai
+			'.Shop::addSqlAssociation('product', 'p').'
 			LEFT JOIN `'._DB_PREFIX_.'image_lang` il ON (il.`id_image` = pai.`id_image`)
 			LEFT JOIN `'._DB_PREFIX_.'image` i ON (i.`id_image` = pai.`id_image`)
 			WHERE pai.`id_product_attribute` IN ('.implode(', ', $ids).') AND il.`id_lang` = '.(int)$id_lang.' ORDER by i.`position`'
